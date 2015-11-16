@@ -23,13 +23,13 @@ $try^{prs}\:k\:err\:pm = lift^{st}(lift^{st}(try^{res} k (\lambda e_1 . try^{res
   \AxiomC{$try^{res}$ $: 
            (\alpha \rightarrow M \beta)\rightarrow
            (\epsilon \rightarrow M \beta)\rightarrow
-           M(\alpha | \epsilon)\rightarrow
-           M(\beta  | \epsilon)$}
+           Mcons^{res}_\alpha\rightarrow
+           Mcons^{res}_\beta$}
   \AxiomC{$(>>=)^{id} : (\alpha \rightarrow M \beta)$}
 \BinaryInfC{$try^{res} (>>=)^{id} :
             (\epsilon \rightarrow M \beta)\rightarrow
-            M(\alpha | \epsilon)\rightarrow
-            M(\beta  | \epsilon)$}
+            Mcons^{res}_\alpha\rightarrow
+            Mcons^{res}_\beta$}
     \AxiomC{$fail^{prs} : 
              \epsilon \rightarrow Mcons^{prs}_\alpha $}
       \AxiomC{$e_1 : \epsilon$}
@@ -40,25 +40,25 @@ $try^{prs}\:k\:err\:pm = lift^{st}(lift^{st}(try^{res} k (\lambda e_1 . try^{res
   \UnaryInfC{$\lambda e_2 . fail^{prs} (e_1+e_2) :
               \epsilon \rightarrow Mcons^{prs}_\alpha$}
 \BinaryInfC{$try^{res} (>>=)^{id}\:(\lambda e_2. fail^{prs}(e_1 + e_2)) :
-             M(\alpha | \epsilon)\rightarrow M(\beta | \epsilon)$}
+             Mcons^{res}_\alpha\rightarrow Mcons^{res}_\beta$}
 \UnaryInfC{$\lambda e_1 . try^{res} (>>=)^{id}\:(\lambda e_2. fail^{prs}(e_1 + e_2)) :
-            \epsilon \rightarrow M(\alpha | \epsilon)\rightarrow M(\beta | \epsilon)$}
+            \epsilon \rightarrow Mcons^{res}_\alpha\rightarrow Mcons^{res}_\beta$}
 \end{prooftree}
 
 \begin{prooftree}
   \AxiomC{$try^{res} :
            (\alpha \rightarrow M \beta)\rightarrow
 	       (\epsilon \rightarrow M \beta)\rightarrow
-           M(\alpha | \epsilon)\rightarrow
-           M(\beta  | \epsilon)$}
+           Mcons^{res}_\alpha\rightarrow
+           Mcons^{res}_\beta$}
   \AxiomC{$k:(\alpha\rightarrow M \beta)$}
 \BinaryInfC{$try^{res}k :
 		 $\textcolor{red}{$(\epsilon \rightarrow M \beta)$} $\rightarrow
-         M(\alpha | \epsilon)\rightarrow
-         M(\beta  | \epsilon)$}
+         Mcons^{res}_\alpha\rightarrow
+         Mcons^{res}_\beta$}
 \AxiomC{$\lambda e_1 . try^{res} (>>=)^{id}\:(\lambda e_2. fail^{prs}(e_1 + e_2)) :
-         $\textcolor{red}{$\epsilon \rightarrow M(\alpha | \epsilon)\rightarrow M(\beta | \epsilon)$}}
-\BinaryInfC{\textbf{Contradiction:} application of $try^{res}\:k$ expects $(\epsilon \rightarrow M \beta)$ but got $(\epsilon \rightarrow M(\alpha | \epsilon)\rightarrow M(\beta | \epsilon))$}
+         $\textcolor{red}{$\epsilon \rightarrow Mcons^{res}_\alpha\rightarrow Mcons^{res}_\beta$}}
+\BinaryInfC{\textbf{Contradiction:} application of $try^{res}\:k$ expects $(\epsilon \rightarrow M \beta)$ but got $(\epsilon \rightarrow Mcons^{res}_\alpha\rightarrow Mcons^{res}_\beta)$}
 \end{prooftree}
 
 \newpage
@@ -72,13 +72,13 @@ $try^{prs}\:k\:err\:pm = lift^{st}(lift^{st}(try^{res} k (\lambda e_1 . try^{res
   \AxiomC{$try^{res}$ $: 
            (\alpha \rightarrow M \beta)\rightarrow
            (\epsilon \rightarrow M \beta)\rightarrow
-           M(\alpha | \epsilon)\rightarrow
-           M(\beta  | \epsilon)$}
+           Mcons^{res}_\alpha\rightarrow
+           Mcons^{res}_\beta$}
   \AxiomC{$return^{id} : (\alpha \rightarrow M \beta)$}
 \BinaryInfC{$try^{res} return^{id} :
             (\epsilon \rightarrow M \beta)\rightarrow
-            M(\alpha | \epsilon)\rightarrow
-            M(\beta  | \epsilon)$}
+            Mcons^{res}_\alpha\rightarrow
+            Mcons^{res}_\beta$}
     \AxiomC{$fail^{prs} : 
              \epsilon \rightarrow Mcons^{prs}_\alpha $}
       \AxiomC{$e_1 : \epsilon$}
@@ -89,41 +89,41 @@ $try^{prs}\:k\:err\:pm = lift^{st}(lift^{st}(try^{res} k (\lambda e_1 . try^{res
   \UnaryInfC{$\lambda e_2 . fail^{prs} (e_1+e_2) :
               \epsilon \rightarrow Mcons^{prs}_\alpha$}
 \BinaryInfC{$try^{res} return^{id}\:(\lambda e_2. fail^{prs}(e_1 + e_2)) :
-             M(\alpha | \epsilon)\rightarrow M(\beta | \epsilon)$}
-\AxiomC{$err : M(\alpha | \epsilon)$}
+             Mcons^{res}_\alpha\rightarrow Mcons^{res}_\beta$}
+\AxiomC{$err : Mcons^{res}_\alpha$}
 \BinaryInfC{$try^{res} return^{id}\:(\lambda e_2. fail^{prs}(e_1 + e_2)) err :
-             M(\beta | \epsilon)$}
+             Mcons^{res}_\beta$}
 \UnaryInfC{$\lambda e_1 . try^{res} return^{id}\:(\lambda e_2. fail^{prs}(e_1 + e_2))err :
-            \epsilon \rightarrow M(\beta | \epsilon)$}
+            \epsilon \rightarrow Mcons^{res}_\beta$}
 \end{prooftree}
 
 \begin{prooftree}
   \AxiomC{$try^{res} :
            (\alpha \rightarrow M \beta)\rightarrow
 	       (\epsilon \rightarrow M \beta)\rightarrow
-           M(\alpha | \epsilon)\rightarrow
-           M(\beta  | \epsilon)$}
+           Mcons^{res}_\alpha\rightarrow
+           Mcons^{res}_\beta$}
   \AxiomC{$k:(\alpha\rightarrow M \beta)$}
 \BinaryInfC{$try^{res}k :
 		 (\epsilon \rightarrow M \beta)\rightarrow
-         M(\alpha | \epsilon)\rightarrow
-         M(\beta  | \epsilon)$}
+         Mcons^{res}_\alpha\rightarrow
+         Mcons^{res}_\beta$}
 \AxiomC{$\lambda e_1 . try^{res} return^{id}\:(\lambda e_2. fail^{prs}(e_1 + e_2))err :
-            \epsilon \rightarrow M(\beta | \epsilon)$}
+            \epsilon \rightarrow Mcons^{res}_\beta$}
 \BinaryInfC{$try^{res}k\:(\lambda e_1 . try^{res} return^{id}\:(\lambda e_2. fail^{prs}(e_1 + e_2))err) :
-            M(\alpha | \epsilon)\rightarrow
-         M(\beta  | \epsilon)$ }
-\AxiomC{$pm:M(\alpha | \epsilon)$}
+            Mcons^{res}_\alpha\rightarrow
+         Mcons^{res}_\beta$ }
+\AxiomC{$pm:Mcons^{res}_\alpha$}
 \BinaryInfC{$try^{res}k\:(\lambda e_1 . try^{res} return^{id}\:(\lambda e_2. fail^{prs}(e_1 + e_2))\:err)\:pm :
-         M(\beta  | \epsilon)$ }
+         Mcons^{res}_\beta$ }
 \end{prooftree}
 
 \begin{prooftree}
 \AxiomC{$try^{res}k\:(\lambda e_1 . try^{res} return^{id}\:(\lambda e_2. fail^{prs}(e_1 + e_2))\:err)\:pm :
-         M(\beta  | \epsilon)$}
+         Mcons^{res}_\beta$}
 \AxiomC{$lift^{st}:(\alpha \rightarrow \beta) \rightarrow Mcons^{st}_\alpha \rightarrow Mcons^{st}_\beta$}
 \BinaryInfC{$lift(try^{res}k\:(\lambda e_1 . try^{res} return^{id}\:(\lambda e_2. fail^{prs}(e_1 + e_2))\:err)\:pm) :
-         M(\beta  | \epsilon)$ }
+         Mcons^{res}_\beta$ }
 \end{prooftree}
 
 \end{document}
