@@ -63,20 +63,20 @@ $try^{prs}\:k\:err\:pm = lift^{st}(lift^{st}(try^{res} k (\lambda e_1 . try^{res
 
 \newpage
 
-$try^{prs}\:k\:err\:pm = lift^{st}(lift^{st}(try^{res} k (\lambda e_1 . try^{res} return^{id} (\lambda e_2. fail^{prs}(e_1 + e_2)))err))pm : (\alpha \rightarrow M \beta)\rightarrow
-	   (\epsilon \rightarrow M \beta)\rightarrow
+$try^{prs}\:k\:err\:pm = lift^{st}(lift^{st}(try^{res} k (\lambda e_1 . try^{res} return^{id} (\lambda e_2. fail^{prs}(e_1 + e_2)))err))pm : (\alpha \rightarrow  Mcons^{prs}_\beta)\rightarrow
+	   (\epsilon \rightarrow Mcons^{prs}_\beta)\rightarrow
        Mcons^{prs}_\alpha \rightarrow
        Mcons^{prs}_\beta $ \\
 
 \begin{prooftree}
   \AxiomC{$try^{res}$ $: 
-           (\alpha \rightarrow M \beta)\rightarrow
-           (\epsilon \rightarrow M \beta)\rightarrow
+           (\alpha \rightarrow Mcons^{res}_\beta)\rightarrow
+           (\epsilon \rightarrow Mcons^{res}_\beta)\rightarrow
            Mcons^{res}_\alpha\rightarrow
            Mcons^{res}_\beta$}
-  \AxiomC{$return^{id} : (\alpha \rightarrow M \beta)$}
+  \AxiomC{$return^{id} : (\alpha \rightarrow Mcons^{res}_\beta)$}
 \BinaryInfC{$try^{res} return^{id} :
-            (\epsilon \rightarrow M \beta)\rightarrow
+            (\epsilon \rightarrow Mcons^{res}_\beta)\rightarrow
             Mcons^{res}_\alpha\rightarrow
             Mcons^{res}_\beta$}
     \AxiomC{$fail^{prs} : 
@@ -99,13 +99,13 @@ $try^{prs}\:k\:err\:pm = lift^{st}(lift^{st}(try^{res} k (\lambda e_1 . try^{res
 
 \begin{prooftree}
   \AxiomC{$try^{res} :
-           (\alpha \rightarrow M \beta)\rightarrow
-	       (\epsilon \rightarrow M \beta)\rightarrow
+           (\alpha \rightarrow Mcons^{res}_\beta)\rightarrow
+	       (\epsilon \rightarrow Mcons^{res}_\beta)\rightarrow
            Mcons^{res}_\alpha\rightarrow
            Mcons^{res}_\beta$}
-  \AxiomC{$k:(\alpha\rightarrow M \beta)$}
+  \AxiomC{$k:(\alpha\rightarrow Mcons^{prs}_\beta)$}
 \BinaryInfC{$try^{res}k :
-		 (\epsilon \rightarrow M \beta)\rightarrow
+		 (\epsilon \rightarrow Mcons^{res}_\beta)\rightarrow
          Mcons^{res}_\alpha\rightarrow
          Mcons^{res}_\beta$}
 \AxiomC{$\lambda e_1 . try^{res} return^{id}\:(\lambda e_2. fail^{prs}(e_1 + e_2))err :
@@ -113,15 +113,12 @@ $try^{prs}\:k\:err\:pm = lift^{st}(lift^{st}(try^{res} k (\lambda e_1 . try^{res
 \BinaryInfC{$try^{res}k\:(\lambda e_1 . try^{res} return^{id}\:(\lambda e_2. fail^{prs}(e_1 + e_2))err) :
             Mcons^{res}_\alpha\rightarrow
          Mcons^{res}_\beta$ }
-\AxiomC{$pm:Mcons^{res}_\alpha$}
-\BinaryInfC{$try^{res}k\:(\lambda e_1 . try^{res} return^{id}\:(\lambda e_2. fail^{prs}(e_1 + e_2))\:err)\:pm :
-         Mcons^{res}_\beta$ }
 \end{prooftree}
 
 \begin{prooftree}
 \AxiomC{$lift^{st}:(\alpha \rightarrow \beta) \rightarrow Mcons^{st}_\alpha \rightarrow Mcons^{st}_\beta$}
 \AxiomC{$lift^{st}:(\alpha \rightarrow \beta) \rightarrow Mcons^{st}_\alpha \rightarrow Mcons^{st}_\beta$}
-\AxiomC{$try^{res}k\:(\lambda e_1 . try^{res} return^{id}\:(\lambda e_2. fail^{prs}(e_1 + e_2))\:err)\:pm :
+\AxiomC{$try^{res}k\:(\lambda e_1 . try^{res} return^{id}\:(\lambda e_2. fail^{prs}(e_1 + e_2))\:err) :
          Mcons^{res}_\beta$}
 \BinaryInfC{$lift(try^{res}k\:(\lambda e_1 . try^{res} return^{id}\:(\lambda e_2. fail^{prs}(e_1 + e_2))\:err)\:pm) :
          Mcons^{res}_\beta$ }
