@@ -63,7 +63,7 @@ $try^{prs}\:k\:err\:pm = lift^{st}(lift^{st}(try^{res} k (\lambda e_1 . try^{res
 
 \newpage
 
-$try^{prs}\:k\:err\:pm = lift^{st}(lift^{st\_ctxt}(try^{res} k (\lambda e_1 . try^{res} return^{id} (\lambda e_2. fail^{prs}(e_1 + e_2)))err))pm : (\alpha \rightarrow  Mcons^{prs}_\beta)\rightarrow
+$try^{prs}\:k\:err\:pm = lift^{st}(lift^{st\_ctxt}(try^{res} k (\lambda e_1 . try^{res} return^{id} (\lambda e_2. fail^{prs}(e_1 + e_2))err)))pm : (\alpha \rightarrow  Mcons^{prs}_\beta)\rightarrow
            (\epsilon \rightarrow Mcons^{prs}_\beta)\rightarrow
        Mcons^{prs}_\alpha \rightarrow
        Mcons^{prs}_\beta $ \\
@@ -116,13 +116,13 @@ $try^{prs}\:k\:err\:pm = lift^{st}(lift^{st\_ctxt}(try^{res} k (\lambda e_1 . tr
 \end{prooftree}
 
 \begin{prooftree}
-\AxiomC{$lift^{st}:(\alpha \rightarrow \beta) \rightarrow Mcons^{st}_\alpha \rightarrow Mcons^{st}_\beta$}
-\AxiomC{$lift^{st}:(\alpha \rightarrow \beta) \rightarrow Mcons^{st}_\alpha \rightarrow Mcons^{st}_\beta$}
+\AxiomC{$lift^{st}:(\alpha \rightarrow \beta) \rightarrow Mcons^{st}_\alpha \rightarrow Mcons^{st\_ctxt}_\beta$}
+\AxiomC{$lift^{st\_ctxt}:(\alpha \rightarrow \beta) \rightarrow Mcons^{st\_ctxt}_\alpha \rightarrow Mcons^{res}_\beta$}
 \AxiomC{$try^{res}k\:(\lambda e_1 . try^{res} return^{id}\:(\lambda e_2. fail^{prs}(e_1 + e_2))\:err) :
          Mcons^{res}_\beta$}
 \BinaryInfC{$lift^{st\_ctxt}(try^{res}k\:(\lambda e_1 . try^{res} return^{id}\:(\lambda e_2. fail^{prs}(e_1 + e_2))\:err)\:pm) :
          Mcons^{res}_\beta$ }
-\BinaryInfC{$lift^{st}(lift^{st\_ctxt}(try^{res}k\:(\lambda e_1 . try^{res} return^{id}\:(\lambda e_2. fail^{prs}(e_1 + e_2))\:err)\:pm)) :
+\BinaryInfC{$lift^{st}(lift^{st\_ctxt}(try^{res}k\:(\lambda e_1 . try^{res} return^{id}\:(\lambda e_2. fail^{prs}(e_1 + e_2))\:err)))\:pm :
          Mcons^{res}_\beta$ }
 \end{prooftree}
 
